@@ -1,18 +1,18 @@
 <?php defined('C5_EXECUTE') or die("Access Denied.");
+/**
+ * Reload page when user updates custom attributes / properties
+ * by overriding the ccmAlert.hud function (which is called by C5 after properties are saved).
+ * See concrete/js/ccm_app/legacy_dialog.js for ccmAlert.hud definition.
+ * See concrete/elements/collection_metadata.php for where it's called (look for '$("#ccmMetadataForm").ajaxForm({').
+ */
 
 $c = Page::getCurrentPage();
 $cp = new Permissions($c);
 
 if (is_object($cp) && $cp->canAdminPage()) {
 	$js = <<<EOT
-	//Reload page when user updates custom attributes / properties
-	// by overriding the ccmAlert.hud function (which is called by C5 after properties are saved).
-	// See concrete/js/ccm_app/legacy_dialog.js for ccmAlert.hud definition,
-	// see concrete/elements/collection_metadata.php for where it's called (look for '$("#ccmMetadataForm").ajaxForm({')
 	$(window).load(function() { //window.load happens after document.ready, so do this to ensure we're firing after ccmAlert is originally defined by C5
-		alert('hi');
 		if (typeof ccmAlert !== 'undefined') {
-			alert('ho');
 			ccmAlert._hud = ccmAlert.hud;
 			ccmAlert.hud = function(message, time, icon, title) {
 				message = (typeof message !== 'undefined') ? message : null;
