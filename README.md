@@ -4,7 +4,7 @@ c5_reload_on_attribute_change
 Reloads page after attributes are saved, so users see immediate feedback on page types that use attributes for layout/design options.
 
 ## Requirements
-Probably only works with Concrete5.5+
+Tested on 5.5 and 5.6. Probably doesn't work on 5.4 or lower.
 
 ## Installation
 Drop the `reload_on_attribute_change.php` file into your site's top-level `elements` directory.
